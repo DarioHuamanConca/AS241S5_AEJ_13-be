@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: as241s5-aej-13-be
+  r2dbc:
+    url: ${SPRING_R2DBC_URL}
+    username: ${SPRING_R2DBC_USERNAME}
+    password: ${SPRING_R2DBC_PASSWORD}
+  sql:
+    init:
+      mode: always
+
+rapidapi:
+  key: ${RAPIDAPI_KEY}
+  llama:
+    host: ${RAPIDAPI_LLAMA_HOST}
+    url: ${RAPIDAPI_LLAMA_URL}
+  tts:
+    host: ${RAPIDAPI_TTS_HOST}
+    url: ${RAPIDAPI_TTS_URL}

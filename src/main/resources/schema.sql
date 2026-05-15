@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS chat_logs;
+CREATE TABLE IF NOT EXISTS chat_logs (
+    id SERIAL PRIMARY KEY,
+    provider VARCHAR(50),
+    prompt TEXT,
+    response TEXT,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
