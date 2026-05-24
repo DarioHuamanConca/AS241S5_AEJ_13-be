@@ -23,7 +23,7 @@ jobs:
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME_DARIO }}
+          username: dariohuamanconca
           password: ${{ secrets.DOCKERHUB_TOKEN_DARIO }}
 
       - name: Set up Docker Buildx
@@ -36,5 +36,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME_DARIO }}/as241s5_aej_13-be:latest
-            ${{ secrets.DOCKERHUB_USERNAME_DARIO }}/as241s5_aej_13-be:${{ github.sha }}
+            dariohuamanconca/as241s5_aej_13-be:latest
+            dariohuamanconca/as241s5_aej_13-be:${{ github.sha }}
