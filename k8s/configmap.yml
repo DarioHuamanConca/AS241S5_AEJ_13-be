@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ia-configmap
+  namespace: ia-project
+data:
+  # Base de Datos en la Nube (Neon DB)
+  SPRING_R2DBC_URL: "r2dbc:postgresql://ep-young-glitter-ad71mrg4-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslMode=verify-full"
+  SPRING_R2DBC_USERNAME: "neondb_owner"
+  SPRING_R2DBC_PASSWORD: "npg_kwDi27pQdIVZ"
+  
+  # Credenciales de API de IA
+  RAPIDAPI_KEY: "ec30cf5d92msh7b1da619ec8415ep19562ejsn9e89a9fc3eab"
+  
+  # Configuración de RapidAPI Llama/Qwen
+  RAPIDAPI_LLAMA_HOST: "open-ai21.p.rapidapi.com"
+  RAPIDAPI_LLAMA_URL: "https://open-ai21.p.rapidapi.com/conversationllama"
+  
+  # Configuración de RapidAPI TTS (Redirigido a API de Imagen)
+  RAPIDAPI_TTS_HOST: "free-100-ai-image-generator-text-to-image-hd-ai-art-maker.p.rapidapi.com"
+  RAPIDAPI_TTS_URL: "https://free-100-ai-image-generator-text-to-image-hd-ai-art-maker.p.rapidapi.com/generate-image"

@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: ia-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: dariohuamanconca/as241s5_aej_13-be:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_R2DBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: SPRING_R2DBC_URL
+            - name: SPRING_R2DBC_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: SPRING_R2DBC_USERNAME
+            - name: SPRING_R2DBC_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: SPRING_R2DBC_PASSWORD
+            - name: RAPIDAPI_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: RAPIDAPI_KEY
+            - name: RAPIDAPI_LLAMA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: RAPIDAPI_LLAMA_HOST
+            - name: RAPIDAPI_LLAMA_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: RAPIDAPI_LLAMA_URL
+            - name: RAPIDAPI_TTS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: RAPIDAPI_TTS_HOST
+            - name: RAPIDAPI_TTS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ia-configmap
+                  key: RAPIDAPI_TTS_URL
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: ia-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: dariohuamanconca/as241s5_aej_13-fe:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
