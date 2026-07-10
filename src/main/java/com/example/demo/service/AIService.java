@@ -43,23 +43,19 @@ public class AIService {
     }
 
     public Mono<byte[]> generateAudio(ChatRequest request) {
-        Map<String, Object> body = Map.of(
-                "model", "tts-1",
-                "input", request.getPrompt(),
-                "instructions", "Speak in a clear, neutral tone.",
-                "voice", "alloy"
-        );
+        // Enviar consulta directa a la API de Imagen libre de Pollinations.ai
+        String encodedPrompt = org.springframework.web.util.UriUtils.encode(request.getPrompt(), java.nio.charset.StandardCharsets.UTF_8);
+        String url = "https://image.pollinations.ai/prompt/" + encodedPrompt;
 
-        return ttsWebClient.post()
-                .uri("")
-                .bodyValue(body)
+        return WebClient.create().get()
+                .uri(url)
                 .retrieve()
                 .bodyToMono(byte[].class)
-                .flatMap(audioBytes -> {
-                    String base64Audio = java.util.Base64.getEncoder().encodeToString(audioBytes);
-                    String dataUri = "data:audio/mpeg;base64," + base64Audio;
+                .flatMap(imageBytes -> {
+                    String base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
+                    String dataUri = "data:image/png;base64," + base64Image;
                     return saveLog("TTS", request.getPrompt(), dataUri)
-                            .thenReturn(audioBytes);
+                            .thenReturn(imageBytes);
                 });
     }
 
